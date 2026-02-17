@@ -15,6 +15,7 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     github: 'https://github.com/nt-petrulio/ratemy-excuse',
     status: 'LIVE',
     localPort: 3001,
+    proxyPath: "/excuse/",
     backlogFile: null,
     whatsnext: 'Deploy to Vercel — import GitHub repo, add env vars, go live',
     todos: [
@@ -71,6 +72,7 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     github: 'https://github.com/nt-petrulio/dental-passport-ios',
     status: 'IN DEV',
     localPort: null,
+    proxyPath: null,
     backlogFile: '/home/molt/clawd/projects/dental-passport-ios/FEATURE_BACKLOG.md',
     whatsnext: 'Build Emergency Travel Guide feature (offline-first, confirmed by Nazartsio)',
     todos: [
@@ -123,6 +125,7 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     github: 'https://github.com/nt-petrulio/openclaw',
     status: 'LIVE',
     localPort: 3000,
+    proxyPath: "/mc/",
     backlogFile: null,
     whatsnext: 'Add stock prices + Notion tasks fetching to dashboard widgets',
     todos: [
@@ -166,6 +169,7 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     github: 'https://github.com/nt-petrulio/finpassport-web',
     status: 'READY',
     localPort: null,
+    proxyPath: null,
     backlogFile: null,
     whatsnext: 'Configure Supabase + test locally, then deploy to Vercel',
     todos: [
@@ -185,6 +189,7 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     github: 'https://github.com/nt-petrulio/linkedin-ai-extension',
     status: 'READY',
     localPort: null,
+    proxyPath: null,
     backlogFile: null,
     whatsnext: 'Load unpacked in Chrome DevMode + test on real LinkedIn profiles',
     todos: [
@@ -283,6 +288,7 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     github: 'https://github.com/nt-petrulio/grant-tracker-ua',
     status: 'READY',
     localPort: null,
+    proxyPath: null,
     backlogFile: null,
     whatsnext: 'Validate demand — post landing in Ukrainian FB groups, collect waitlist emails',
     todos: [
@@ -301,6 +307,7 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     github: '',
     status: 'READY',
     localPort: null,
+    proxyPath: null,
     backlogFile: null,
     whatsnext: 'Дослідити ринок → скласти програму → побудувати landing page',
     todos: [
@@ -378,6 +385,7 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     github: 'https://github.com/nt-petrulio/yt-video-staging',
     status: 'READY',
     localPort: null,
+    proxyPath: null,
     backlogFile: null,
     whatsnext: 'Set up Supabase + Google OAuth, then deploy to Vercel',
     todos: [

@@ -27,6 +27,7 @@ export interface ProjectConfig {
   github: string;
   status: ProjectStatus;
   localPort: number | null;
+  proxyPath: string | null;  // gateway proxy path e.g. /excuse/ or /mc/
   backlogFile: string | null;
   whatsnext: string;
   todos: string[];

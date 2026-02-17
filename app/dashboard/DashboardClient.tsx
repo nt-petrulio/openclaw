@@ -164,9 +164,19 @@ function GridView({ projects }: { projects: ProjectWithDate[] }) {
                           ? `last commit: ${formatDate(project.lastCommitDate)}`
                           : 'no commits'}
                       </span>
-                      <span className="text-green-800 group-hover:text-green-600 transition-colors">
-                        {project.localPort ? `localhost:${project.localPort}` : 'view →'}
-                      </span>
+                      {(project.proxyPath || project.localPort) ? (
+                        <a
+                          href={project.proxyPath ?? `http://localhost:${project.localPort}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="text-green-600 hover:text-green-400 transition-colors"
+                        >
+                          {project.proxyPath ? `↗ ${project.proxyPath}` : `↗ :${project.localPort}`}
+                        </a>
+                      ) : (
+                        <span className="text-green-900">view →</span>
+                      )}
                     </div>
                     {project.pm2 && (
                       <div className="mt-2 flex items-center gap-1 text-xs">
