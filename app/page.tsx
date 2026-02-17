@@ -11,6 +11,7 @@ export default function Home() {
           <Link href="#how" className="hover:text-green-400">How it works</Link>
           <Link href="#tools" className="hover:text-green-400">Tools</Link>
           <Link href="/dashboard" className="hover:text-green-400">Dashboard</Link>
+          <a href="/gateway/" className="hover:text-green-400">Gateway</a>
           <Link href="/chat" className="border border-green-500 px-3 py-1 text-green-400 hover:bg-green-950">Chat →</Link>
         </div>
       </nav>
