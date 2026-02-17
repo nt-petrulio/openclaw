@@ -305,6 +305,49 @@ export default async function ProjectDetail({
             </section>
 
           </div>
+
+          {/* Competitors */}
+          {project.wiki.competitors && project.wiki.competitors.length > 0 && (
+            <section className="mt-6 border border-yellow-950 p-4">
+              <h3 className="text-xs text-yellow-700 tracking-widest mb-4">🥊 COMPETITORS</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full text-xs">
+                  <thead>
+                    <tr className="text-yellow-900 border-b border-yellow-950">
+                      <th className="text-left pb-2 pr-4">Product</th>
+                      <th className="text-left pb-2 pr-4">Extension</th>
+                      <th className="text-left pb-2 pr-4">Free Plan</th>
+                      <th className="text-left pb-2 pr-4">Pricing</th>
+                      <th className="text-left pb-2">Our Advantage</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {project.wiki.competitors.map((c) => (
+                      <tr key={c.name} className="border-b border-yellow-950/30 hover:bg-yellow-950/10 transition-colors">
+                        <td className="py-2 pr-4">
+                          <a href={c.url} target="_blank" rel="noopener noreferrer"
+                            className="text-yellow-600 hover:text-yellow-400 font-bold transition-colors">
+                            {c.name} →
+                          </a>
+                        </td>
+                        <td className="py-2 pr-4">
+                          <span className={c.extension ? 'text-green-600' : 'text-red-900'}>
+                            {c.extension ? '✅ Yes' : '❌ No'}
+                          </span>
+                        </td>
+                        <td className="py-2 pr-4 text-green-800">
+                          {c.freePlan ?? <span className="text-red-900">None</span>}
+                        </td>
+                        <td className="py-2 pr-4 text-green-900">{c.pricing}</td>
+                        <td className="py-2 text-green-800">{c.gap}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          )}
+
           <p className="text-green-900 text-xs mt-4 text-center">
             Edit wiki → /home/molt/clawd/projects/openclaw/lib/projects.ts
           </p>

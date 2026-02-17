@@ -2,11 +2,21 @@
 
 export type ProjectStatus = 'IN DEV' | 'READY' | 'LIVE' | 'DONE';
 
+export interface Competitor {
+  name: string;
+  url: string;
+  extension: boolean;
+  freePlan: string | null;  // null = no free plan
+  pricing: string;
+  gap: string;              // what they're missing / our advantage
+}
+
 export interface ProjectWiki {
-  features: string[];       // what's built
-  risks: string[];          // technical/legal/market risks
-  marketing: string[];      // strategy, channels, growth
-  seo: string[];            // keywords, OG, sitemap status
+  features: string[];
+  risks: string[];
+  marketing: string[];
+  seo: string[];
+  competitors?: Competitor[];
 }
 
 export interface ProjectConfig {
