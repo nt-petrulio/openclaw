@@ -2,6 +2,13 @@
 
 export type ProjectStatus = 'IN DEV' | 'READY' | 'LIVE' | 'DONE';
 
+export interface ProjectWiki {
+  features: string[];       // what's built
+  risks: string[];          // technical/legal/market risks
+  marketing: string[];      // strategy, channels, growth
+  seo: string[];            // keywords, OG, sitemap status
+}
+
 export interface ProjectConfig {
   slug: string;
   name: string;
@@ -13,6 +20,7 @@ export interface ProjectConfig {
   backlogFile: string | null;
   whatsnext: string;
   todos: string[];
+  wiki?: ProjectWiki;
 }
 
 export interface GitCommit {

@@ -245,6 +245,71 @@ export default async function ProjectDetail({
           </section>
         </div>
       </div>
+
+      {/* Wiki Section */}
+      {project.wiki && (
+        <div className="mt-8 border-t border-green-900 pt-8">
+          <h2 className="text-xs text-green-600 tracking-widest mb-6">// PROJECT WIKI</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            {/* Features */}
+            <section className="border border-green-900 p-4">
+              <h3 className="text-xs text-green-600 tracking-widest mb-3">✅ FEATURES BUILT</h3>
+              <ul className="space-y-1.5">
+                {project.wiki.features.map((f, i) => (
+                  <li key={i} className="text-xs text-green-800 flex gap-2">
+                    <span className="text-green-900 flex-shrink-0">›</span>
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            {/* Risks */}
+            <section className="border border-red-950 p-4">
+              <h3 className="text-xs text-red-700 tracking-widest mb-3">⚠️ RISKS</h3>
+              <ul className="space-y-1.5">
+                {project.wiki.risks.map((r, i) => (
+                  <li key={i} className="text-xs text-red-900 flex gap-2">
+                    <span className="text-red-900 flex-shrink-0">›</span>
+                    <span>{r}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            {/* Marketing */}
+            <section className="border border-violet-950 p-4">
+              <h3 className="text-xs text-violet-700 tracking-widest mb-3">📣 MARKETING</h3>
+              <ul className="space-y-1.5">
+                {project.wiki.marketing.map((m, i) => (
+                  <li key={i} className="text-xs text-violet-900 flex gap-2">
+                    <span className="text-violet-900 flex-shrink-0">›</span>
+                    <span>{m}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            {/* SEO */}
+            <section className="border border-cyan-950 p-4">
+              <h3 className="text-xs text-cyan-700 tracking-widest mb-3">🔍 SEO</h3>
+              <ul className="space-y-1.5">
+                {project.wiki.seo.map((s, i) => (
+                  <li key={i} className="text-xs text-cyan-900 flex gap-2">
+                    <span className="text-cyan-900 flex-shrink-0">›</span>
+                    <span>{s}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+          </div>
+          <p className="text-green-900 text-xs mt-4 text-center">
+            Edit wiki → /home/molt/clawd/projects/openclaw/lib/projects.ts
+          </p>
+        </div>
+      )}
     </main>
   );
 }
