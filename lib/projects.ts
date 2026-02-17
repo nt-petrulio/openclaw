@@ -8,6 +8,27 @@ export { formatUptime, formatBytes } from './project-types';
 
 export const PROJECT_CONFIGS: ProjectConfig[] = [
   {
+    slug: 'ratemy-excuse',
+    name: 'ratemy.excuse',
+    emoji: '🎭',
+    repo: '/home/molt/clawd/projects/ratemy-excuse',
+    github: 'https://github.com/nt-petrulio/ratemy-excuse',
+    status: 'LIVE',
+    localPort: 3001,
+    backlogFile: null,
+    whatsnext: 'Deploy to Vercel — import GitHub repo, add env vars, go live',
+    todos: [
+      '🚀 Deploy to Vercel (import from GitHub)',
+      '🔑 Set env vars: OPENAI_API_KEY, AI_MODEL, RESEND_API_KEY, OWNER_EMAIL',
+      '📊 Enable Vercel Analytics in dashboard after deploy',
+      '🔍 Submit sitemap to Google Search Console',
+      '💳 Add Stripe for real $1.29/mo subscriptions',
+      '🏆 Real leaderboard with DB (Supabase) — replace seeded data',
+      '👤 User accounts — save excuse history',
+      '📱 Share to Twitter button with grade card image',
+    ],
+  },
+  {
     slug: 'dental-passport',
     name: 'Dental Passport iOS',
     emoji: '🦷',
@@ -16,16 +37,19 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     status: 'IN DEV',
     localPort: null,
     backlogFile: '/home/molt/clawd/projects/dental-passport-ios/FEATURE_BACKLOG.md',
-    whatsnext: 'Implement Emergency Travel Guide + Insurance Tracker features',
+    whatsnext: 'Build Emergency Travel Guide feature (offline-first, confirmed by Nazartsio)',
     todos: [
-      'Build offline Emergency Travel Guide (tooth knocked out flow)',
-      'Implement Insurance Tracker with claim status tracking',
-      'Add AI Triage: "Should I Go Today?" symptom checker',
-      'Dental tourism price comparison map',
+      '🏥 Emergency Travel Guide — tooth knocked out offline flow',
+      '🛡️ Insurance Tracker — claim status + reimbursement log',
+      '🤖 AI Triage — "Should I Go Today?" symptom checker',
+      '⌚ HealthKit integration — toothbrushingEvent + Clinical Records',
+      '🍎 App Clip — scan QR at dentist, instant record view',
+      '📋 FEATURE_BACKLOG.md has 33+ ideas rated by impact',
+      '🧪 Awaiting Xcode testing on real device (Nazartsio)',
     ],
   },
   {
-    slug: 'mission-control',
+    slug: 'openclaw',
     name: 'OpenClaw',
     emoji: '🎯',
     repo: '/home/molt/clawd/projects/openclaw',
@@ -33,12 +57,13 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     status: 'LIVE',
     localPort: 3000,
     backlogFile: null,
-    whatsnext: 'Mission Control v2 — project ops dashboard',
+    whatsnext: 'Add stock prices + Notion tasks fetching to dashboard widgets',
     todos: [
-      'Add real-time uptime monitoring widget',
-      'Connect Notion tasks to project cards',
-      'Add MRR tracker with Stripe integration',
-      'Mobile-responsive layout pass',
+      '📈 Wire up real stock data (Alpha Vantage API key needed)',
+      '📝 Connect Notion tasks (NOTION_API_KEY needed in .env.local)',
+      '💰 Add MRR tracker — manual input or Stripe webhook',
+      '📱 Mobile-responsive pass — dashboard breaks on phone',
+      '🔔 Deploy to Vercel + custom domain (clawdops.com?)',
     ],
   },
   {
@@ -50,12 +75,14 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     status: 'READY',
     localPort: null,
     backlogFile: null,
-    whatsnext: 'Launch MVP — personal finance tracker with multi-currency support',
+    whatsnext: 'Configure Supabase + test locally, then deploy to Vercel',
     todos: [
-      'Set up Next.js project scaffold',
-      'Design transaction input UI',
-      'Add currency conversion API integration',
-      'Implement budget categories and charts',
+      '🗄️ Set up Supabase project + run schema migrations',
+      '🔑 Add NEXT_PUBLIC_SUPABASE_URL + ANON_KEY to .env.local',
+      '🧪 Test Account CRUD + Transaction CRUD locally',
+      '🚀 Deploy to Vercel',
+      '💳 Monobank API integration (real bank sync)',
+      '📊 Add charts — spending by category, monthly trends',
     ],
   },
   {
@@ -67,12 +94,13 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     status: 'READY',
     localPort: null,
     backlogFile: null,
-    whatsnext: 'Build AI-powered outreach message generator Chrome extension',
+    whatsnext: 'Load unpacked in Chrome DevMode + test on real LinkedIn profiles',
     todos: [
-      'Set up Chrome extension manifest v3 scaffold',
-      'Design side panel UI for message generation',
-      'Integrate OpenAI/Claude API for message drafting',
-      'Add profile scraping to personalize messages',
+      '🧪 Test in Chrome: DevMode → Load Unpacked → test on profiles',
+      '🔑 Add real OpenAI API key in extension settings',
+      '🎨 Polish UI — better popup design',
+      '📦 Publish to Chrome Web Store ($5 one-time fee)',
+      '💰 Add usage limit for free tier + upgrade prompt',
     ],
   },
   {
@@ -84,12 +112,13 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     status: 'READY',
     localPort: null,
     backlogFile: null,
-    whatsnext: 'Launch Ukrainian grant database with search and filters',
+    whatsnext: 'Validate demand — post landing in Ukrainian FB groups, collect waitlist emails',
     todos: [
-      'Scrape and normalize grant data from official sources',
-      'Build search + filter UI',
-      'Add email alerts for new grants',
-      'Deploy to production',
+      '📢 Post landing page in Ukrainian entrepreneur communities',
+      '📧 Set up waitlist email collection (Resend)',
+      '🗄️ Build grant database — scrape from Diia, USAID, EU4Business',
+      '🔔 Email alerts for new matching grants',
+      '🚀 Deploy to Vercel',
     ],
   },
   {
@@ -101,12 +130,13 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     status: 'READY',
     localPort: null,
     backlogFile: null,
-    whatsnext: 'Build YouTube video staging and review workflow tool',
+    whatsnext: 'Set up Supabase + Google OAuth, then deploy to Vercel',
     todos: [
-      'Set up video upload and preview interface',
-      'Add title/description/thumbnail editor',
-      'Implement review and approval workflow',
-      'YouTube API integration for publishing',
+      '🗄️ Set up Supabase project + run schema',
+      '🔑 Configure Google OAuth in Supabase dashboard',
+      '🧪 Test auth + video CRUD locally',
+      '🚀 Deploy to Vercel',
+      '📺 YouTube API — auto-publish approved videos',
     ],
   },
 ];
@@ -145,7 +175,7 @@ export function getPM2Processes(): PM2Process[] {
     const raw = safeExec('pm2 jlist');
     if (!raw) return [];
     const list = JSON.parse(raw);
-    return list.map((p: any) => ({
+    return list.map((p: { name: string; pm_id: number; pid: number; pm2_env?: { status?: string; pm_uptime?: number; restart_time?: number }; monit?: { cpu?: number; memory?: number } }) => ({
       name: p.name,
       pm_id: p.pm_id,
       status: p.pm2_env?.status ?? 'unknown',
@@ -179,7 +209,7 @@ export function getAllProjectData(): ProjectData[] {
         (p) =>
           p.name === config.slug ||
           p.name === config.name.toLowerCase().replace(/\s+/g, '-') ||
-          (config.slug === 'mission-control' && p.name === 'openclaw')
+          (config.slug === 'openclaw' && p.name === 'openclaw')
       ) ?? null;
     const backlogContent = getBacklogContent(config.backlogFile);
 
