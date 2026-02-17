@@ -500,6 +500,12 @@ export default function DashboardClient({
             </button>
           )}
           <Link
+            href="/dashboard/ideas"
+            className="border border-violet-700 text-violet-400 px-3 py-1 hover:border-violet-400 hover:text-violet-300 transition-colors"
+          >
+            💡 Ideas
+          </Link>
+          <Link
             href="/dashboard/apps"
             className="border border-green-700 px-3 py-1 hover:border-green-400 hover:text-green-300 transition-colors"
           >
