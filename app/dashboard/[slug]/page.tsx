@@ -62,7 +62,17 @@ export default async function ProjectDetail({
           >
             GitHub ↗
           </a>
-          {project.localPort && (
+          {project.proxyPath && (
+            <a
+              href={project.proxyPath}
+              target="_blank"
+              rel="noreferrer"
+              className="border border-green-500 bg-green-950 hover:bg-green-900 hover:border-green-300 px-3 py-1 text-green-400 hover:text-green-200 transition-colors font-bold"
+            >
+              🚀 Open App
+            </a>
+          )}
+          {!project.proxyPath && project.localPort && (
             <a
               href={`http://localhost:${project.localPort}`}
               target="_blank"
@@ -173,7 +183,18 @@ export default async function ProjectDetail({
                 <span>GitHub</span>
                 <span className="text-green-900 group-hover:text-green-700">↗</span>
               </a>
-              {project.localPort && (
+              {project.proxyPath && (
+                <a
+                  href={project.proxyPath}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex justify-between text-green-400 hover:text-green-200 transition-colors group font-bold"
+                >
+                  <span>🚀 Open App</span>
+                  <span className="text-green-600 group-hover:text-green-400">↗</span>
+                </a>
+              )}
+              {!project.proxyPath && project.localPort && (
                 <a
                   href={`http://localhost:${project.localPort}`}
                   target="_blank"

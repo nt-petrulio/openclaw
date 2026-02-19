@@ -144,7 +144,7 @@ function GridView({ projects }: { projects: ProjectWithDate[] }) {
             <h2 className="text-xs text-green-800 tracking-widest mb-3">// {status}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {list.map((project) => (
-                <Link key={project.slug} href={`/dashboard/${project.slug}`} className="block">
+                <Link key={project.slug} href="/dashboard/apps" className="block">
                   <div className="border border-green-900 hover:border-green-600 p-4 transition-colors group">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-2">
@@ -164,19 +164,33 @@ function GridView({ projects }: { projects: ProjectWithDate[] }) {
                           ? `last commit: ${formatDate(project.lastCommitDate)}`
                           : 'no commits'}
                       </span>
-                      {(project.proxyPath || project.localPort) ? (
-                        <a
-                          href={project.proxyPath ?? `http://localhost:${project.localPort}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="text-green-600 hover:text-green-400 transition-colors"
-                        >
-                          {project.proxyPath ? `↗ ${project.proxyPath}` : `↗ :${project.localPort}`}
-                        </a>
-                      ) : (
-                        <span className="text-green-900">view →</span>
-                      )}
+                      <div className="flex items-center gap-2">
+                        {project.proxyPath && (
+                          <a
+                            href={project.proxyPath}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="border border-green-600 bg-green-950 text-green-400 hover:bg-green-900 hover:text-green-200 hover:border-green-400 transition-colors px-2 py-0.5 text-xs font-bold"
+                          >
+                            🚀 Open App
+                          </a>
+                        )}
+                        {!project.proxyPath && project.localPort && (
+                          <a
+                            href={`http://localhost:${project.localPort}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="text-green-600 hover:text-green-400 transition-colors"
+                          >
+                            ↗ :{project.localPort}
+                          </a>
+                        )}
+                        {!project.proxyPath && !project.localPort && (
+                          <span className="text-green-900">view →</span>
+                        )}
+                      </div>
                     </div>
                     {project.pm2 && (
                       <div className="mt-2 flex items-center gap-1 text-xs">
@@ -319,7 +333,7 @@ function KanbanBoard({ projects }: { projects: ProjectWithDate[] }) {
 
   const handleCardClick = (slug: string) => {
     if (draggingSlug) return; // don't navigate while dragging
-    router.push(`/dashboard/${slug}`);
+    router.push('/dashboard/apps');
   };
 
   return (
@@ -404,11 +418,24 @@ function KanbanBoard({ projects }: { projects: ProjectWithDate[] }) {
                         )}
                       </div>
 
-                      {/* Commit age */}
-                      <div className="text-xs text-green-900 border-t border-green-950 pt-1.5 mt-1.5">
-                        {project.commits.length > 0
-                          ? formatDate(project.lastCommitDate)
-                          : 'no commits'}
+                      {/* Commit age + Open App */}
+                      <div className="text-xs text-green-900 border-t border-green-950 pt-1.5 mt-1.5 flex items-center justify-between gap-1">
+                        <span>
+                          {project.commits.length > 0
+                            ? formatDate(project.lastCommitDate)
+                            : 'no commits'}
+                        </span>
+                        {project.proxyPath && (
+                          <a
+                            href={project.proxyPath}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="border border-green-700 bg-green-950 text-green-500 hover:bg-green-900 hover:text-green-300 transition-colors px-1.5 py-0.5 text-xs font-bold shrink-0"
+                          >
+                            🚀
+                          </a>
+                        )}
                       </div>
                     </div>
                   </div>
