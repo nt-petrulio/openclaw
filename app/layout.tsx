@@ -15,8 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${mono.className} bg-black`}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${mono.className} bg-black`} suppressHydrationWarning>
+        {children}
+      </body>
     </html>
   );
 }
