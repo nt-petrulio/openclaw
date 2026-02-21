@@ -129,6 +129,8 @@ function ProjectCard({
 // ─── Grid View ───────────────────────────────────────────────────────────────
 
 function GridView({ projects }: { projects: ProjectWithDate[] }) {
+  const router = useRouter();
+  
   const byStatus: Record<string, ProjectWithDate[]> = {
     LIVE: projects.filter((p) => p.status === 'LIVE'),
     'IN DEV': projects.filter((p) => p.status === 'IN DEV'),
@@ -144,7 +146,11 @@ function GridView({ projects }: { projects: ProjectWithDate[] }) {
             <h2 className="text-xs text-green-800 tracking-widest mb-3">// {status}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {list.map((project) => (
-                <Link key={project.slug} href="/dashboard/apps" className="block">
+                <div 
+                  key={project.slug}
+                  onClick={() => router.push('/dashboard/apps')}
+                  className="block cursor-pointer"
+                >
                   <div className="border border-green-900 hover:border-green-600 p-4 transition-colors group">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-2">
@@ -203,7 +209,7 @@ function GridView({ projects }: { projects: ProjectWithDate[] }) {
                       </div>
                     )}
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
           </div>
