@@ -466,22 +466,22 @@ function KanbanBoard({ projects }: { projects: ProjectWithDate[] }) {
 interface DashboardClientProps {
   projects: ProjectWithDate[];
   projectCount: number;
-  kyivTime: string;
-  isoTime: string;
 }
 
 export default function DashboardClient({
   projects,
   projectCount,
-  kyivTime,
-  isoTime,
 }: DashboardClientProps) {
   const [view, setView] = useState<ViewMode>('grid');
   const [mounted, setMounted] = useState(false);
+  const [kyivTime, setKyivTime] = useState('');
+  const [isoTime, setIsoTime] = useState('');
 
-  // Load view from localStorage on mount
+  // Load view from localStorage on mount + generate time
   useEffect(() => {
     setMounted(true);
+    setKyivTime(new Date().toLocaleString('en-US', { timeZone: 'Europe/Kyiv' }));
+    setIsoTime(new Date().toISOString());
     try {
       const saved = localStorage.getItem('dashboard-view') as ViewMode | null;
       if (saved === 'kanban' || saved === 'grid') setView(saved);

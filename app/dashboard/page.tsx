@@ -9,15 +9,10 @@ export default async function Dashboard() {
     lastCommitDate: getGitLastCommitDate(p.repo),
   }));
 
-  const kyivTime = new Date().toLocaleString('en-US', { timeZone: 'Europe/Kyiv' });
-  const isoTime = new Date().toISOString();
-
   return (
     <DashboardClient
       projects={projectsWithDate}
       projectCount={projects.length}
-      kyivTime={kyivTime}
-      isoTime={isoTime}
     />
   );
 }
