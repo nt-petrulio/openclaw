@@ -15,7 +15,8 @@ export interface ProjectWiki {
   features: string[];
   risks: string[];
   marketing: string[];
-  seo: string[];
+  seo?: string[];
+  monetization?: string[];
   competitors?: Competitor[];
 }
 

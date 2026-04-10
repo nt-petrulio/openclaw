@@ -316,7 +316,7 @@ export default async function ProjectDetail({
             <section className="border border-cyan-950 p-4">
               <h3 className="text-xs text-cyan-700 tracking-widest mb-3">🔍 SEO</h3>
               <ul className="space-y-1.5">
-                {project.wiki.seo.map((s, i) => (
+                {(project.wiki.seo ?? []).map((s, i) => (
                   <li key={i} className="text-xs text-cyan-900 flex gap-2">
                     <span className="text-cyan-900 flex-shrink-0">›</span>
                     <span>{s}</span>
