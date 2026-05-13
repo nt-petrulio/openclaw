@@ -9,6 +9,17 @@ interface Message {
   ts: string;
 }
 
+interface GatewayContentPart {
+  type?: string;
+  text?: string;
+}
+
+interface GatewayHistoryMessage {
+  role?: string;
+  content?: string | GatewayContentPart[];
+  timestamp?: string | number;
+}
+
 type WSState = 'connecting' | 'connected' | 'error' | 'disconnected';
 
 const GW_URL = process.env.NEXT_PUBLIC_GATEWAY_WS || 'ws://localhost:18789';
@@ -58,13 +69,13 @@ export default function Chat() {
         }
 
         if (msg.type === 'chat.history') {
-          const items: Message[] = (msg.history || [])
-            .filter((m: any) => m.role === 'user' || m.role === 'assistant')
-            .map((m: any) => ({
-              role: m.role,
+          const items: Message[] = ((msg.history || []) as GatewayHistoryMessage[])
+            .filter((m) => m.role === 'user' || m.role === 'assistant')
+            .map((m) => ({
+              role: m.role as 'user' | 'assistant',
               text: typeof m.content === 'string'
                 ? m.content
-                : m.content?.find((c: any) => c.type === 'text')?.text || '',
+                : m.content?.find((c) => c.type === 'text')?.text || '',
               ts: new Date(m.timestamp || Date.now()).toLocaleTimeString('uk-UA'),
             }))
             .filter((m: Message) => m.text);
@@ -108,7 +119,8 @@ export default function Chat() {
     ws.onerror = () => setWsState('error');
     ws.onclose = () => {
       setWsState('disconnected');
-      setTimeout(connect, 3000); // auto-reconnect
+      // eslint-disable-next-line react-hooks/immutability
+      setTimeout(() => connect(), 3000); // auto-reconnect
     };
 
     return ws;

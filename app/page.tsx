@@ -18,7 +18,7 @@ export default function Home() {
 
       {/* Hero */}
       <section className="px-8 py-20 max-w-3xl">
-        <p className="text-green-700 text-sm tracking-widest mb-4">// YOUR AI AGENT</p>
+        <p className="text-green-700 text-sm tracking-widest mb-4">{"// YOUR AI AGENT"}</p>
         <h1 className="text-6xl font-bold leading-tight mb-6">
           Meet<br />
           <span className="text-green-400">Petrulio</span> 🚀
@@ -54,7 +54,7 @@ export default function Home() {
 
       {/* How it works */}
       <section id="how" className="px-8 py-16 max-w-3xl">
-        <h2 className="text-xs text-green-700 tracking-widest mb-8">// HOW IT WORKS</h2>
+        <h2 className="text-xs text-green-700 tracking-widest mb-8">{"// HOW IT WORKS"}</h2>
         <div className="space-y-6">
           {[
             { step: '01', title: 'Always on', desc: 'Petrulio runs on your server 24/7 via Moltbot. Heartbeats every 30 min. Checks GitHub, markets, news while you sleep.' },
@@ -75,7 +75,7 @@ export default function Home() {
 
       {/* Tools */}
       <section id="tools" className="border-t border-green-900 px-8 py-16">
-        <h2 className="text-xs text-green-700 tracking-widest mb-8">// TOOLS & PROJECTS</h2>
+        <h2 className="text-xs text-green-700 tracking-widest mb-8">{"// TOOLS & PROJECTS"}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {[
             { emoji: '🎯', name: 'Mission Control', desc: 'Stocks, tasks, goals dashboard', href: '/dashboard', status: 'LIVE' },
