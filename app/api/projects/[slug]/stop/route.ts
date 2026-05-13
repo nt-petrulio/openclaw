@@ -18,7 +18,8 @@ export async function POST(
     const pm2Name = slug === 'mission-control' ? 'openclaw' : slug;
     execSync(`pm2 stop ${pm2Name}`, { timeout: 10000 });
     return NextResponse.json({ success: true, action: 'stop', name: pm2Name });
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Unknown PM2 error';
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

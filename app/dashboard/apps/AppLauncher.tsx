@@ -44,8 +44,9 @@ export default function AppLauncher({ initialProjects }: AppLauncherProps) {
         // Refresh after action
         setTimeout(refresh, 1500);
       }
-    } catch (err: any) {
-      setError((prev) => ({ ...prev, [slug]: err.message }));
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Unknown action error';
+      setError((prev) => ({ ...prev, [slug]: message }));
     } finally {
       setLoading((prev) => {
         const next = { ...prev };
@@ -63,7 +64,7 @@ export default function AppLauncher({ initialProjects }: AppLauncherProps) {
       {/* PM2 controlled apps */}
       <section>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xs text-green-700 tracking-widest">// PM2 PROCESSES</h2>
+          <h2 className="text-xs text-green-700 tracking-widest">{"// PM2 PROCESSES"}</h2>
           <div className="flex items-center gap-4 text-xs text-green-900">
             <span>last refresh: {lastRefresh.toLocaleTimeString()}</span>
             <button
@@ -184,7 +185,7 @@ export default function AppLauncher({ initialProjects }: AppLauncherProps) {
       {noPm2Projects.length > 0 && (
         <section>
           <h2 className="text-xs text-green-900 tracking-widest mb-4">
-            // OTHER PROJECTS (not in PM2)
+            {"// OTHER PROJECTS (not in PM2)"}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {noPm2Projects.map((project) => (

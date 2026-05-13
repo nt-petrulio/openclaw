@@ -11,7 +11,7 @@ export async function getStockPrice(symbol: string) {
       change: quote['09. change'] || 'N/A',
       percentChange: quote['10. change percent'] || 'N/A',
     };
-  } catch (e) {
+  } catch {
     return { symbol, price: 'Error', change: '0', percentChange: '0%' };
   }
 }
