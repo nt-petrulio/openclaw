@@ -123,9 +123,13 @@ export default function DashboardClient({ projects, projectCount }: { projects: 
             </p>
           </div>
           <nav className="flex flex-wrap gap-2 text-sm">
+            <Link href="/dashboard/taskboard" className="border border-yellow-700 text-yellow-400 px-3 py-2 hover:border-yellow-400 hover:text-yellow-200">⬛ Task Board</Link>
+            <Link href="/dashboard/projects" className="border border-green-700 text-green-300 px-3 py-2 hover:border-green-400 hover:text-green-100">📁 Projects</Link>
+            <Link href="/dashboard/calendar" className="border border-blue-800 text-blue-300 px-3 py-2 hover:border-blue-400">📅 Calendar</Link>
+            <Link href="/dashboard/memory" className="border border-violet-800 text-violet-300 px-3 py-2 hover:border-violet-400">🧠 Memory</Link>
+            <Link href="/dashboard/docs" className="border border-orange-800 text-orange-300 px-3 py-2 hover:border-orange-400">📄 Docs</Link>
             <Link href="/dashboard/tasks" className="border border-green-800 px-3 py-2 hover:border-green-400 hover:text-green-200">✓ Tasks</Link>
             <Link href="/dashboard/deploy" className="border border-green-800 px-3 py-2 hover:border-green-400 hover:text-green-200">🚀 Deploy</Link>
-            <Link href="/dashboard/apps" className="border border-green-800 px-3 py-2 hover:border-green-400 hover:text-green-200">⚙ Apps</Link>
             <Link href="/dashboard/ideas" className="border border-violet-800 text-violet-300 px-3 py-2 hover:border-violet-400">💡 Ideas</Link>
             <Link href="/" className="text-green-900 hover:text-green-600 px-3 py-2">← home</Link>
           </nav>
