@@ -125,6 +125,7 @@ export default function DashboardClient({ projects, projectCount }: { projects: 
           <nav className="flex flex-wrap gap-2 text-sm">
             <Link href="/dashboard/taskboard" className="border border-yellow-700 text-yellow-400 px-3 py-2 hover:border-yellow-400 hover:text-yellow-200">⬛ Task Board</Link>
             <Link href="/dashboard/projects" className="border border-green-700 text-green-300 px-3 py-2 hover:border-green-400 hover:text-green-100">📁 Projects</Link>
+            <Link href="/dashboard/agent-runs" className="border border-cyan-800 text-cyan-300 px-3 py-2 hover:border-cyan-400">Agent Runs</Link>
             <Link href="/dashboard/calendar" className="border border-blue-800 text-blue-300 px-3 py-2 hover:border-blue-400">📅 Calendar</Link>
             <Link href="/dashboard/memory" className="border border-violet-800 text-violet-300 px-3 py-2 hover:border-violet-400">🧠 Memory</Link>
             <Link href="/dashboard/docs" className="border border-orange-800 text-orange-300 px-3 py-2 hover:border-orange-400">📄 Docs</Link>
