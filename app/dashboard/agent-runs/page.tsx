@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getAgentRuns, type AgentRun } from '@/lib/agent-runs';
+import AgentRunForm from './AgentRunForm';
 
 export const dynamic = 'force-dynamic';
 
@@ -123,8 +124,10 @@ export default function AgentRunsPage() {
       </section>
 
       <section className="border border-yellow-950 bg-yellow-950/5 p-4 mb-6 text-sm text-yellow-200">
-        <span className="text-yellow-600">Rule:</span> this page is read-only. No message can be sent and no CRM can be touched from here.
+        <span className="text-yellow-600">Rule:</span> this page only creates and reviews approval drafts. No message can be sent and no CRM can be touched from here.
       </section>
+
+      <AgentRunForm />
 
       <section className="space-y-4">
         {runs.map((run) => <RunCard key={run.id} run={run} />)}
