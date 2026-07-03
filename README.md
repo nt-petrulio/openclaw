@@ -29,6 +29,7 @@ npm run build
 - `/mc/dashboard/docs` - documentation shortcuts.
 - `/mc/dashboard/memory` - memory file shortcuts.
 - `/mc/dashboard/deploy` - deployment status view.
+- `/mc/api/agents/finance/status` - safe Finance Agent runtime status; never includes raw balances.
 
 ## Deployment Notes
 

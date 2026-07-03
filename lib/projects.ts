@@ -671,7 +671,7 @@ export function getBacklogContent(backlogFile: string | null): string | null {
   }
 }
 
-function getFinanceAgentStatus(): AgentRuntimeStatus | null {
+export function getFinanceAgentStatus(): AgentRuntimeStatus | null {
   const financeCorePath = '/home/ubuntu/projects/KLEPKA/finance-bot/finance_core.py';
   if (!fs.existsSync(financeCorePath)) return null;
 
