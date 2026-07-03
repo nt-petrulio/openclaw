@@ -1,7 +1,7 @@
 // SERVER-ONLY: this file uses Node.js built-ins, never import in client components
 import { execSync } from 'child_process';
 import fs from 'fs';
-import type { ProjectConfig, ProjectData, GitCommit, PM2Process } from './project-types';
+import type { AgentRuntimeStatus, ProjectConfig, ProjectData, GitCommit, PM2Process } from './project-types';
 
 export type { ProjectStatus, ProjectConfig, GitCommit, PM2Process, ProjectData } from './project-types';
 export { formatUptime, formatBytes } from './project-types';
@@ -671,6 +671,27 @@ export function getBacklogContent(backlogFile: string | null): string | null {
   }
 }
 
+function getFinanceAgentStatus(): AgentRuntimeStatus | null {
+  const financeCorePath = '/home/ubuntu/projects/KLEPKA/finance-bot/finance_core.py';
+  if (!fs.existsSync(financeCorePath)) return null;
+
+  const raw = safeExec(`python3 "${financeCorePath}" status`);
+  if (!raw) return null;
+
+  try {
+    const parsed = JSON.parse(raw) as AgentRuntimeStatus;
+    if (!parsed.safeForMissionControl || parsed.rawBalancesIncluded) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function runtimeStatusForProject(slug: string): AgentRuntimeStatus | null {
+  if (slug === 'finpassport-web') return getFinanceAgentStatus();
+  return null;
+}
+
 export function getAllProjectData(): ProjectData[] {
   const pm2Processes = getPM2Processes();
 
@@ -684,12 +705,17 @@ export function getAllProjectData(): ProjectData[] {
           (config.slug === 'openclaw' && p.name === 'openclaw')
       ) ?? null;
     const backlogContent = getBacklogContent(config.backlogFile);
+    const agentStatus = runtimeStatusForProject(config.slug);
 
     return {
       ...config,
+      blocker: agentStatus?.blocker ?? config.blocker,
+      lastVerifiedAt: agentStatus?.lastVerifiedAt ?? config.lastVerifiedAt,
+      whatsnext: agentStatus?.nextAction ?? config.whatsnext,
       commits,
       pm2,
       backlogContent,
+      agentStatus,
     };
   });
 }

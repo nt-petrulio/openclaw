@@ -38,6 +38,17 @@ export interface ProjectConfig {
   wiki?: ProjectWiki;
 }
 
+export interface AgentRuntimeStatus {
+  id: string;
+  ownerAgent: string;
+  status: 'ready' | 'blocked' | 'needs-review' | string;
+  blocker: string | null;
+  lastVerifiedAt: string;
+  nextAction: string;
+  safeForMissionControl: boolean;
+  rawBalancesIncluded: boolean;
+}
+
 export interface GitCommit {
   hash: string;
   message: string;
@@ -58,6 +69,7 @@ export interface ProjectData extends ProjectConfig {
   commits: GitCommit[];
   pm2: PM2Process | null;
   backlogContent: string | null;
+  agentStatus: AgentRuntimeStatus | null;
 }
 
 export function formatUptime(uptimeMs: number | null): string {

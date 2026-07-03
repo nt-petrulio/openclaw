@@ -10,6 +10,12 @@ const STATUS_STYLES: Record<string, string> = {
   DONE:     'border-blue-700 text-blue-300 bg-blue-950/30',
 };
 
+const AGENT_STATUS_STYLES: Record<string, string> = {
+  ready: 'border-emerald-900 text-emerald-400',
+  blocked: 'border-yellow-900 text-yellow-400',
+  'needs-review': 'border-orange-900 text-orange-400',
+};
+
 function formatDate(dateStr: string | null): string {
   if (!dateStr) return 'no commits';
   const d = new Date(dateStr);
@@ -93,6 +99,18 @@ export default function ProjectsPage() {
                         </div>
                       </div>
                     </div>
+
+                    {p.agentStatus && (
+                      <div className={`mb-3 border px-2 py-1 text-[11px] ${AGENT_STATUS_STYLES[p.agentStatus.status] ?? 'border-green-950 text-green-700'}`}>
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="uppercase">agent {p.agentStatus.status}</span>
+                          <span className="text-green-900">
+                            balances {p.agentStatus.rawBalancesIncluded ? 'included' : 'hidden'}
+                          </span>
+                        </div>
+                        <div className="text-green-800 line-clamp-1 mt-1">{p.agentStatus.nextAction}</div>
+                      </div>
+                    )}
 
                     {p.todos.length > 0 && (
                       <div className="mb-3 space-y-1">
