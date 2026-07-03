@@ -30,6 +30,7 @@ npm run build
 - `/mc/dashboard/memory` - memory file shortcuts.
 - `/mc/dashboard/deploy` - deployment status view.
 - `/mc/api/agents/finance/status` - safe Finance Agent runtime status; never includes raw balances.
+- `/mc/api/agent-runs` - approval-first agent run records for Pipeline Scout and future agents; no external sends.
 
 ## Deployment Notes
 
