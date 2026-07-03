@@ -81,6 +81,19 @@ export default function ProjectsPage() {
 
                     <p className="text-green-800 text-xs mb-3 line-clamp-1">→ {p.whatsnext}</p>
 
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3 text-[11px]">
+                      <div className="border border-green-950 px-2 py-1">
+                        <div className="text-green-950 uppercase">owner</div>
+                        <div className="text-green-700 truncate">{p.ownerAgent ?? 'Petrulio Core'}</div>
+                      </div>
+                      <div className={`border px-2 py-1 ${p.blocker ? 'border-yellow-900' : 'border-green-950'}`}>
+                        <div className={p.blocker ? 'text-yellow-900 uppercase' : 'text-green-950 uppercase'}>blocker</div>
+                        <div className={p.blocker ? 'text-yellow-500 truncate' : 'text-green-800'}>
+                          {p.blocker ?? 'none'}
+                        </div>
+                      </div>
+                    </div>
+
                     {p.todos.length > 0 && (
                       <div className="mb-3 space-y-1">
                         {p.todos.slice(0, 3).map((t, i) => (
@@ -102,6 +115,11 @@ export default function ProjectsPage() {
                         {p.pm2 ? `pm2 ${p.pm2.status}` : 'no pm2'}
                       </span>
                     </div>
+                    {p.lastVerifiedAt && (
+                      <div className="text-[10px] text-green-950 mt-2">
+                        verified {formatDate(p.lastVerifiedAt)}
+                      </div>
+                    )}
                   </Link>
                 );
               })}

@@ -30,6 +30,9 @@ export interface ProjectConfig {
   localPort: number | null;
   proxyPath: string | null;  // gateway proxy path e.g. /excuse/ or /mc/
   backlogFile: string | null;
+  ownerAgent?: string;
+  blocker?: string | null;
+  lastVerifiedAt?: string | null;
   whatsnext: string;
   todos: string[];
   wiki?: ProjectWiki;

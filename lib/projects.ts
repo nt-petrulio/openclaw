@@ -141,6 +141,9 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     localPort: 3000,
     proxyPath: "/mc/",
     backlogFile: null,
+    ownerAgent: 'Mission Control Agent',
+    blocker: 'Needs NOTION_API_KEY before Notion task sync can ship',
+    lastVerifiedAt: '2026-07-03T07:04:00Z',
     whatsnext: 'Add stock prices + Notion tasks fetching to dashboard widgets',
     todos: [
       '📈 Wire up real stock data (Alpha Vantage API key needed)',
@@ -185,6 +188,9 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     localPort: 3002,
     proxyPath: '/finpassport/',
     backlogFile: null,
+    ownerAgent: 'Finance Agent',
+    blocker: 'Needs Supabase project and private finance datastore contract',
+    lastVerifiedAt: '2026-07-03T07:04:00Z',
     whatsnext: 'Configure Supabase + deploy with real DB, add Monobank integration',
     todos: [
       '🧪 Currently running with MOCK data on :3002',
@@ -353,6 +359,9 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     localPort: 3011,
     proxyPath: '/holos/',
     backlogFile: '/home/ubuntu/.openclaw/workspace/projects/holos-landing/CONTENT_SCRIPTS.md',
+    ownerAgent: 'Launch Agent',
+    blocker: 'Needs WayForPay/LiqPay links and author photo',
+    lastVerifiedAt: '2026-07-03T07:04:00Z',
     whatsnext: 'Записати перше TikTok відео (60 сек) — "Як зняти затиск голосу за 2 хвилини"',
     todos: [
       '🎬 Записати Відео 1: Затиск голосу (найпростіше, highest value)',
@@ -554,6 +563,9 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     localPort: 3333,
     proxyPath: '/festpilot/',
     backlogFile: null,
+    ownerAgent: 'Launch Agent',
+    blocker: 'Needs persistent waitlist storage before production launch',
+    lastVerifiedAt: '2026-07-03T07:04:00Z',
     whatsnext: 'Deploy to Vercel + set up Supabase for email waitlist collection',
     todos: [
       '🚀 Deploy to Vercel (import from GitHub)',
