@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getAgentRuns, type AgentRun } from '@/lib/agent-runs';
+import AgentRunActions from './AgentRunActions';
 import AgentRunForm from './AgentRunForm';
 
 export const dynamic = 'force-dynamic';
@@ -83,6 +84,8 @@ function RunCard({ run }: { run: AgentRun }) {
           notes: {run.notes}
         </div>
       )}
+
+      <AgentRunActions id={run.id} approvalStatus={run.approvalStatus} />
     </article>
   );
 }
