@@ -14,6 +14,10 @@ const DOC_FILES = [
   { key: 'AGENTS.md',   label: 'Agents',   color: 'text-blue-300 border-blue-900' },
   { key: 'TOOLS.md',    label: 'Tools',    color: 'text-cyan-300 border-cyan-900' },
   { key: 'USER.md',     label: 'User',     color: 'text-green-300 border-green-900' },
+  { key: 'MULTI_AGENT_ARCHITECTURE.md', label: 'Multi-Agent', color: 'text-teal-300 border-teal-900' },
+  { key: 'PIPELINE_SCOUT_AGENT.md', label: 'Pipeline Scout', color: 'text-amber-300 border-amber-900' },
+  { key: 'DATAHUB_AGENT_HACKATHON.md', label: 'DataHub Sprint', color: 'text-sky-300 border-sky-900' },
+  { key: 'FUTURE.md', label: 'Future Radar', color: 'text-fuchsia-300 border-fuchsia-900' },
 ];
 
 interface DocFile {
