@@ -76,6 +76,14 @@ export default async function TasksPage() {
           <div className="text-yellow-300 font-bold">{oneThing.project ?? 'Manual Queue'}</div>
           <p className="text-sm text-yellow-100 mt-1">[ ] {oneThing.title}</p>
           {oneThing.notes && <p className="text-xs text-yellow-700 mt-2 leading-relaxed">{oneThing.notes}</p>}
+          <div className="flex flex-wrap gap-2 text-[10px] mt-3">
+            {oneThing.dueAt && <span className="border border-orange-800 px-2 py-0.5 text-orange-300">{formatDue(oneThing.dueAt)}</span>}
+            {oneThing.href && (
+              <Link href={oneThing.href} className="border border-yellow-700 px-2 py-0.5 text-yellow-300 hover:text-yellow-100 hover:border-yellow-300">
+                {oneThing.actionLabel ?? 'open'}
+              </Link>
+            )}
+          </div>
         </section>
       )}
 
