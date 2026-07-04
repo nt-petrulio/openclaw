@@ -91,7 +91,7 @@ export default async function ProjectDetail({
           {/* What's been done — git commits */}
           <section className="border border-green-900 p-4">
             <h2 className="text-sm text-green-700 tracking-widest mb-4 border-b border-green-950 pb-2">
-              // WHAT&apos;S BEEN DONE
+              {"// WHAT&apos;S BEEN DONE"}
             </h2>
             {project.commits.length > 0 ? (
               <div className="space-y-2">
@@ -113,7 +113,7 @@ export default async function ProjectDetail({
           {/* What needs to be done */}
           <section className="border border-green-900 p-4">
             <h2 className="text-sm text-green-700 tracking-widest mb-4 border-b border-green-950 pb-2">
-              // WHAT NEEDS TO BE DONE
+              {"// WHAT NEEDS TO BE DONE"}
             </h2>
             <div className="space-y-2">
               {project.todos.map((todo, i) => (
@@ -129,7 +129,7 @@ export default async function ProjectDetail({
           {backlogSections.length > 0 && (
             <section className="border border-green-900 p-4">
               <h2 className="text-sm text-green-700 tracking-widest mb-4 border-b border-green-950 pb-2">
-                // IDEAS & FEATURE BACKLOG
+                {"// IDEAS & FEATURE BACKLOG"}
               </h2>
               <div className="space-y-4">
                 {backlogSections.map((section) => (
@@ -153,7 +153,7 @@ export default async function ProjectDetail({
           {backlogSections.length === 0 && !project.backlogContent && (
             <section className="border border-green-900 p-4">
               <h2 className="text-sm text-green-700 tracking-widest mb-4 border-b border-green-950 pb-2">
-                // IDEAS
+                {"// IDEAS"}
               </h2>
               <p className="text-green-900 text-xs">
                 No backlog file configured. Add a FEATURE_BACKLOG.md to the repo to see ideas here.
@@ -166,13 +166,13 @@ export default async function ProjectDetail({
         <div className="space-y-6">
           {/* What's next */}
           <section className="border border-green-700 p-4">
-            <h2 className="text-xs text-green-700 tracking-widest mb-3">// NEXT UP</h2>
+            <h2 className="text-xs text-green-700 tracking-widest mb-3">{"// NEXT UP"}</h2>
             <p className="text-green-400 text-sm leading-relaxed">→ {project.whatsnext}</p>
           </section>
 
           {/* Links */}
           <section className="border border-green-900 p-4">
-            <h2 className="text-xs text-green-700 tracking-widest mb-3">// LINKS</h2>
+            <h2 className="text-xs text-green-700 tracking-widest mb-3">{"// LINKS"}</h2>
             <div className="space-y-2 text-xs">
               <a
                 href={project.github}
@@ -218,7 +218,7 @@ export default async function ProjectDetail({
           {/* PM2 status */}
           {project.pm2 && (
             <section className="border border-green-900 p-4">
-              <h2 className="text-xs text-green-700 tracking-widest mb-3">// PM2 STATUS</h2>
+              <h2 className="text-xs text-green-700 tracking-widest mb-3">{"// PM2 STATUS"}</h2>
               <div className="space-y-2 text-xs">
                 <div className="flex justify-between">
                   <span className="text-green-900">status</span>
@@ -248,7 +248,7 @@ export default async function ProjectDetail({
 
           {/* Project meta */}
           <section className="border border-green-900 p-4">
-            <h2 className="text-xs text-green-700 tracking-widest mb-3">// META</h2>
+            <h2 className="text-xs text-green-700 tracking-widest mb-3">{"// META"}</h2>
             <div className="space-y-2 text-xs">
               <div className="flex justify-between">
                 <span className="text-green-900">slug</span>
@@ -270,7 +270,7 @@ export default async function ProjectDetail({
       {/* Wiki Section */}
       {project.wiki && (
         <div className="mt-8 border-t border-green-900 pt-8">
-          <h2 className="text-xs text-green-600 tracking-widest mb-6">// PROJECT WIKI</h2>
+          <h2 className="text-xs text-green-600 tracking-widest mb-6">{"// PROJECT WIKI"}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
             {/* Features */}

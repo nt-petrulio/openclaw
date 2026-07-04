@@ -30,9 +30,23 @@ export interface ProjectConfig {
   localPort: number | null;
   proxyPath: string | null;  // gateway proxy path e.g. /excuse/ or /mc/
   backlogFile: string | null;
+  ownerAgent?: string;
+  blocker?: string | null;
+  lastVerifiedAt?: string | null;
   whatsnext: string;
   todos: string[];
   wiki?: ProjectWiki;
+}
+
+export interface AgentRuntimeStatus {
+  id: string;
+  ownerAgent: string;
+  status: 'ready' | 'blocked' | 'needs-review' | string;
+  blocker: string | null;
+  lastVerifiedAt: string;
+  nextAction: string;
+  safeForMissionControl: boolean;
+  rawBalancesIncluded: boolean;
 }
 
 export interface GitCommit {
@@ -55,6 +69,7 @@ export interface ProjectData extends ProjectConfig {
   commits: GitCommit[];
   pm2: PM2Process | null;
   backlogContent: string | null;
+  agentStatus: AgentRuntimeStatus | null;
 }
 
 export function formatUptime(uptimeMs: number | null): string {

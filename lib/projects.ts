@@ -1,7 +1,7 @@
 // SERVER-ONLY: this file uses Node.js built-ins, never import in client components
 import { execSync } from 'child_process';
 import fs from 'fs';
-import type { ProjectConfig, ProjectData, GitCommit, PM2Process } from './project-types';
+import type { AgentRuntimeStatus, ProjectConfig, ProjectData, GitCommit, PM2Process } from './project-types';
 
 export type { ProjectStatus, ProjectConfig, GitCommit, PM2Process, ProjectData } from './project-types';
 export { formatUptime, formatBytes } from './project-types';
@@ -11,7 +11,7 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     slug: 'ratemy-excuse',
     name: 'ratemy.excuse',
     emoji: '🎭',
-    repo: '/home/molt/clawd/projects/ratemy-excuse',
+    repo: '/home/ubuntu/.openclaw/workspace/projects/ratemy-excuse',
     github: 'https://github.com/nt-petrulio/ratemy-excuse',
     status: 'LIVE',
     localPort: 3001,
@@ -68,12 +68,12 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     slug: 'dental-passport',
     name: 'Dental Passport iOS',
     emoji: '🦷',
-    repo: '/home/molt/clawd/projects/dental-passport-ios',
+    repo: '/home/ubuntu/.openclaw/workspace/projects/dental-passport-ios',
     github: 'https://github.com/nt-petrulio/dental-passport-ios',
     status: 'IN DEV',
     localPort: 3010,
     proxyPath: '/dental/',
-    backlogFile: '/home/molt/clawd/projects/dental-passport-ios/FEATURE_BACKLOG.md',
+    backlogFile: '/home/ubuntu/.openclaw/workspace/projects/dental-passport-ios/FEATURE_BACKLOG.md',
     whatsnext: 'Submit to App Store (free, no monetization) → validate PMF → add StoreKit Month 3',
     todos: [
       '📱 App Store submission prep (screenshots, description, privacy policy)',
@@ -135,12 +135,15 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     slug: 'openclaw',
     name: 'OpenClaw',
     emoji: '🎯',
-    repo: '/home/molt/clawd/projects/openclaw',
+    repo: '/home/ubuntu/.openclaw/workspace/projects/openclaw',
     github: 'https://github.com/nt-petrulio/openclaw',
     status: 'LIVE',
     localPort: 3000,
     proxyPath: "/mc/",
     backlogFile: null,
+    ownerAgent: 'Mission Control Agent',
+    blocker: 'Needs NOTION_API_KEY before Notion task sync can ship',
+    lastVerifiedAt: '2026-07-03T07:04:00Z',
     whatsnext: 'Add stock prices + Notion tasks fetching to dashboard widgets',
     todos: [
       '📈 Wire up real stock data (Alpha Vantage API key needed)',
@@ -179,12 +182,15 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     slug: 'finpassport-web',
     name: 'FinPassport Web',
     emoji: '💰',
-    repo: '/home/molt/clawd/projects/finpassport-web',
+    repo: '/home/ubuntu/.openclaw/workspace/projects/finpassport-web',
     github: 'https://github.com/nt-petrulio/finpassport-web',
     status: 'LIVE',
     localPort: 3002,
     proxyPath: '/finpassport/',
     backlogFile: null,
+    ownerAgent: 'Finance Agent',
+    blocker: 'Needs Supabase project and private finance datastore contract',
+    lastVerifiedAt: '2026-07-03T07:04:00Z',
     whatsnext: 'Configure Supabase + deploy with real DB, add Monobank integration',
     todos: [
       '🧪 Currently running with MOCK data on :3002',
@@ -229,7 +235,7 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     slug: 'linkedin-ai',
     name: 'LinkedIn AI Extension',
     emoji: '🤝',
-    repo: '/home/molt/clawd/projects/linkedin-ai-extension',
+    repo: '/home/ubuntu/.openclaw/workspace/projects/linkedin-ai-extension',
     github: 'https://github.com/nt-petrulio/linkedin-ai-extension',
     status: 'READY',
     localPort: null,
@@ -328,7 +334,7 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     slug: 'grant-tracker-ua',
     name: 'Grant Tracker UA',
     emoji: '🇺🇦',
-    repo: '/home/molt/clawd/projects/grant-tracker-ua',
+    repo: '/home/ubuntu/.openclaw/workspace/projects/grant-tracker-ua',
     github: 'https://github.com/nt-petrulio/grant-tracker-ua',
     status: 'READY',
     localPort: null,
@@ -347,12 +353,15 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     slug: 'scenichna-mova',
     name: 'ГОЛОС — Курс ораторства',
     emoji: '🎤',
-    repo: '/home/molt/clawd/projects/holos-landing',
+    repo: '/home/ubuntu/.openclaw/workspace/projects/holos-landing',
     github: 'https://github.com/nt-petrulio/holos-landing',
     status: 'IN DEV',
     localPort: 3011,
     proxyPath: '/holos/',
-    backlogFile: '/home/molt/clawd/projects/holos-landing/CONTENT_SCRIPTS.md',
+    backlogFile: '/home/ubuntu/.openclaw/workspace/projects/holos-landing/CONTENT_SCRIPTS.md',
+    ownerAgent: 'Launch Agent',
+    blocker: 'Needs WayForPay/LiqPay links and author photo',
+    lastVerifiedAt: '2026-07-03T07:04:00Z',
     whatsnext: 'Записати перше TikTok відео (60 сек) — "Як зняти затиск голосу за 2 хвилини"',
     todos: [
       '🎬 Записати Відео 1: Затиск голосу (найпростіше, highest value)',
@@ -439,7 +448,7 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     slug: 'yt-video-staging',
     name: 'YT Video Staging',
     emoji: '📹',
-    repo: '/home/molt/clawd/projects/yt-video-staging',
+    repo: '/home/ubuntu/.openclaw/workspace/projects/yt-video-staging',
     github: 'https://github.com/nt-petrulio/yt-video-staging',
     status: 'READY',
     localPort: null,
@@ -458,7 +467,7 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     slug: 'resumate',
     name: 'Resumate',
     emoji: '✨',
-    repo: '/home/molt/clawd/projects/resumate',
+    repo: '/home/ubuntu/.openclaw/workspace/projects/resumate',
     github: 'https://github.com/nt-petrulio/resumate',
     status: 'IN DEV',
     localPort: 3010,
@@ -503,7 +512,7 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     slug: 'ats-api',
     name: 'ATS API',
     emoji: '🔧',
-    repo: '/home/molt/clawd/projects/ats-api',
+    repo: '/home/ubuntu/.openclaw/workspace/projects/ats-api',
     github: 'https://github.com/nt-petrulio/ats-api',
     status: 'IN DEV',
     localPort: 3011,
@@ -548,12 +557,15 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
     slug: 'festpilot-landing',
     name: 'FestPilot Landing',
     emoji: '🎪',
-    repo: '/home/molt/clawd/projects/festpilot-landing',
+    repo: '/home/ubuntu/.openclaw/workspace/projects/festpilot-landing',
     github: 'https://github.com/nt-petrulio/festpilot-landing',
     status: 'LIVE',
     localPort: 3333,
     proxyPath: '/festpilot/',
     backlogFile: null,
+    ownerAgent: 'Launch Agent',
+    blocker: 'Needs persistent waitlist storage before production launch',
+    lastVerifiedAt: '2026-07-03T07:04:00Z',
     whatsnext: 'Deploy to Vercel + set up Supabase for email waitlist collection',
     todos: [
       '🚀 Deploy to Vercel (import from GitHub)',
@@ -659,6 +671,27 @@ export function getBacklogContent(backlogFile: string | null): string | null {
   }
 }
 
+export function getFinanceAgentStatus(): AgentRuntimeStatus | null {
+  const financeCorePath = '/home/ubuntu/projects/KLEPKA/finance-bot/finance_core.py';
+  if (!fs.existsSync(financeCorePath)) return null;
+
+  const raw = safeExec(`python3 "${financeCorePath}" status`);
+  if (!raw) return null;
+
+  try {
+    const parsed = JSON.parse(raw) as AgentRuntimeStatus;
+    if (!parsed.safeForMissionControl || parsed.rawBalancesIncluded) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function runtimeStatusForProject(slug: string): AgentRuntimeStatus | null {
+  if (slug === 'finpassport-web') return getFinanceAgentStatus();
+  return null;
+}
+
 export function getAllProjectData(): ProjectData[] {
   const pm2Processes = getPM2Processes();
 
@@ -672,12 +705,17 @@ export function getAllProjectData(): ProjectData[] {
           (config.slug === 'openclaw' && p.name === 'openclaw')
       ) ?? null;
     const backlogContent = getBacklogContent(config.backlogFile);
+    const agentStatus = runtimeStatusForProject(config.slug);
 
     return {
       ...config,
+      blocker: agentStatus?.blocker ?? config.blocker,
+      lastVerifiedAt: agentStatus?.lastVerifiedAt ?? config.lastVerifiedAt,
+      whatsnext: agentStatus?.nextAction ?? config.whatsnext,
       commits,
       pm2,
       backlogContent,
+      agentStatus,
     };
   });
 }

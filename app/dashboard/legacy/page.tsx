@@ -2,6 +2,13 @@ import { getStockPrice } from '@/lib/stocks';
 import { getNotionTasks } from '@/lib/notion';
 import Link from 'next/link';
 
+interface LegacyTask {
+  id: string;
+  title: string;
+  status: string;
+  priority: string;
+}
+
 export default async function Dashboard() {
   const symbols = ['MSFT', 'AMZN', 'DUOL', 'FICO'];
   const stocks = await Promise.all(symbols.map(s => getStockPrice(s)));
@@ -37,7 +44,7 @@ export default async function Dashboard() {
             {tasks.length === 0 ? (
               <p className="text-green-800 text-sm">Set NOTION_API_KEY to load tasks</p>
             ) : (
-              tasks.map((t: any) => (
+              (tasks as LegacyTask[]).map((t) => (
                 <div key={t.id} className="flex justify-between text-sm">
                   <span className="truncate w-2/3">[{t.priority}] {t.title}</span>
                   <span className="text-xs border border-green-800 px-1">{t.status}</span>

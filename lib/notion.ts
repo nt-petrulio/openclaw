@@ -1,7 +1,18 @@
+interface NotionTaskPage {
+  id: string;
+  properties?: {
+    Name?: { title?: { plain_text?: string }[] };
+    Status?: { select?: { name?: string } | null };
+    Priority?: { select?: { name?: string } | null };
+  };
+}
+
 export async function getNotionTasks() {
   const apiKey = process.env.NOTION_API_KEY;
   const databaseId = '519c4ea61b2d49fe8c94f571729fc245';
-  
+
+  if (!apiKey) return [];
+
   try {
     const res = await fetch(`https://api.notion.com/v1/databases/${databaseId}/query`, {
       method: 'POST',
@@ -15,12 +26,13 @@ export async function getNotionTasks() {
         sorts: [{ property: 'Priority', direction: 'ascending' }],
       }),
     });
-    const data = await res.json();
-    return data.results.map((page: any) => ({
+    if (!res.ok) return [];
+    const data: { results?: NotionTaskPage[] } = await res.json();
+    return (data.results ?? []).map((page) => ({
       id: page.id,
-      title: page.properties.Name?.title[0]?.plain_text || 'Untitled',
-      status: page.properties.Status?.select?.name || 'No Status',
-      priority: page.properties.Priority?.select?.name || 'P4',
+      title: page.properties?.Name?.title?.[0]?.plain_text || 'Untitled',
+      status: page.properties?.Status?.select?.name || 'No Status',
+      priority: page.properties?.Priority?.select?.name || 'P4',
     }));
   } catch (e) {
     console.error('Notion fetch error', e);
