@@ -25,7 +25,7 @@ npm run build
 - `/mc/dashboard` - main ops dashboard.
 - `/mc/dashboard/taskboard` - task board backed by backlog/manual task persistence.
 - `/mc/dashboard/projects` - project status overview.
-- `/mc/dashboard/agent-runs` - approval queue for Pipeline Scout/future agent runs, with approve/reject/reopen controls and no send action.
+- `/mc/dashboard/agent-runs` - approval queue for Pipeline Scout/future agent runs, with approve/reject/reopen controls and no send/CRM actions.
 - `/mc/dashboard/calendar` - upcoming work view.
 - `/mc/dashboard/docs` - documentation shortcuts.
 - `/mc/dashboard/memory` - memory file shortcuts.
