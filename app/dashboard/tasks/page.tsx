@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getAllProjectData } from '@/lib/projects';
+import { getWorkspaceTasks } from '@/lib/workspace-tasks';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,9 +19,19 @@ function tone(priority: string) {
   return 'border-green-950 text-green-800';
 }
 
+function statusTone(status: string) {
+  if (status.toLowerCase() === 'todo') return 'text-yellow-400 border-yellow-950';
+  if (status.toLowerCase() === 'doing') return 'text-green-300 border-green-900';
+  if (status.toLowerCase().includes('blocked')) return 'text-red-300 border-red-950';
+  return 'text-green-800 border-green-950';
+}
+
 export default async function TasksPage() {
   const projects = getAllProjectData();
-  const tasks = projects.flatMap((project) =>
+  const workspaceTasks = getWorkspaceTasks()
+    .filter((task) => task.status.toLowerCase() !== 'done')
+    .sort((a, b) => a.priority.localeCompare(b.priority));
+  const projectTasks = projects.flatMap((project) =>
     project.todos.map((todo, index) => ({
       id: `${project.slug}-${index}`,
       todo,
@@ -29,7 +40,9 @@ export default async function TasksPage() {
     }))
   ).sort((a, b) => a.priority.localeCompare(b.priority));
 
-  const oneThing = tasks.find((t) => t.priority.startsWith('P1')) ?? tasks[0];
+  const oneThing = workspaceTasks.find((t) => t.priority.startsWith('P1'));
+  const fallbackThing = projectTasks.find((t) => t.priority.startsWith('P1')) ?? projectTasks[0];
+  const totalTasks = workspaceTasks.length + projectTasks.length;
 
   return (
     <main className="min-h-screen bg-black text-green-500 font-mono p-6 md:p-8">
@@ -37,7 +50,9 @@ export default async function TasksPage() {
         <div>
           <div className="text-green-900 text-xs tracking-[0.35em] mb-2">MISSION CONTROL</div>
           <h1 className="text-4xl font-black text-green-300">TASKS</h1>
-          <p className="text-green-800 text-sm mt-2">{tasks.length} tasks extracted from project configs</p>
+          <p className="text-green-800 text-sm mt-2">
+            {totalTasks} active tasks · {workspaceTasks.length} manual · {projectTasks.length} project todos
+          </p>
         </div>
         <Link href="/dashboard" className="text-green-800 hover:text-green-400">← dashboard</Link>
       </header>
@@ -45,15 +60,51 @@ export default async function TasksPage() {
       {oneThing && (
         <section className="border border-yellow-800 bg-yellow-950/10 p-4 mb-6">
           <h2 className="text-xs text-yellow-500 tracking-widest mb-2">{"// ONE THING TODAY"}</h2>
-          <Link href={`/dashboard/${oneThing.project.slug}`} className="block hover:text-yellow-200">
-            <div className="text-yellow-300 font-bold">{oneThing.project.emoji} {oneThing.project.name}</div>
-            <p className="text-sm text-yellow-100 mt-1">[ ] {oneThing.todo}</p>
+          <div className="text-yellow-300 font-bold">{oneThing.project ?? 'Manual Queue'}</div>
+          <p className="text-sm text-yellow-100 mt-1">[ ] {oneThing.title}</p>
+          {oneThing.notes && <p className="text-xs text-yellow-700 mt-2 leading-relaxed">{oneThing.notes}</p>}
+        </section>
+      )}
+
+      {!oneThing && fallbackThing && (
+        <section className="border border-yellow-800 bg-yellow-950/10 p-4 mb-6">
+          <h2 className="text-xs text-yellow-500 tracking-widest mb-2">{"// ONE THING TODAY"}</h2>
+          <Link href={`/dashboard/${fallbackThing.project.slug}`} className="block hover:text-yellow-200">
+            <div className="text-yellow-300 font-bold">{fallbackThing.project.emoji} {fallbackThing.project.name}</div>
+            <p className="text-sm text-yellow-100 mt-1">[ ] {fallbackThing.todo}</p>
           </Link>
         </section>
       )}
 
+      {workspaceTasks.length > 0 && (
+        <section className="mb-7">
+          <div className="flex items-center justify-between border-b border-green-950 pb-2 mb-3">
+            <h2 className="text-xs text-green-700 tracking-widest">{"// MANUAL QUEUE"}</h2>
+            <span className="text-xs text-green-900">from workspace tasks.json</span>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+            {workspaceTasks.map((task) => (
+              <article key={task.id} className="border border-green-950 bg-zinc-950/70 p-4">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <div className="text-green-300 font-bold text-sm">{task.project ?? 'Manual Queue'}</div>
+                    <p className="text-green-600 text-sm mt-2 leading-relaxed">[ ] {task.title}</p>
+                  </div>
+                  <span className={`border px-2 py-0.5 text-[10px] shrink-0 ${tone(task.priority)}`}>{task.priority}</span>
+                </div>
+                {task.notes && <p className="text-green-800 text-xs mt-3 leading-relaxed">{task.notes}</p>}
+                <div className="flex flex-wrap gap-2 text-[10px] mt-3 border-t border-green-950 pt-2">
+                  <span className={`border px-2 py-0.5 ${statusTone(task.status)}`}>{task.status}</span>
+                  {task.source && <span className="border border-green-950 px-2 py-0.5 text-green-900">{task.source}</span>}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-        {tasks.map((task) => (
+        {projectTasks.map((task) => (
           <Link key={task.id} href={`/dashboard/${task.project.slug}`} className="border border-green-950 hover:border-green-600 bg-zinc-950/60 p-4 transition-colors">
             <div className="flex items-start justify-between gap-3">
               <div>
