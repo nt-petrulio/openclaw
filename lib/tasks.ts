@@ -16,6 +16,7 @@ export interface Task {
   notes?: string;
   href?: string;
   actionLabel?: string;
+  dueAt?: string;
   deleted?: boolean;
   createdAt: string;
   updatedAt: string;

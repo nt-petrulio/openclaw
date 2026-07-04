@@ -13,6 +13,19 @@ const PRIORITY_COLORS: Record<string, string> = {
   P4: 'border-green-950 text-green-700 bg-black/20',
 };
 
+function formatDue(dueAt?: string) {
+  if (!dueAt) return '';
+  const due = new Date(`${dueAt}T23:59:59+03:00`);
+  if (Number.isNaN(due.getTime())) return dueAt;
+
+  const now = new Date();
+  const days = Math.ceil((due.getTime() - now.getTime()) / 86_400_000);
+  if (days < 0) return `overdue ${Math.abs(days)}d`;
+  if (days === 0) return 'due today';
+  if (days === 1) return 'due tomorrow';
+  return `due in ${days}d`;
+}
+
 function TaskCard({ task, onMove, onDelete }: {
   task: Task;
   onMove: (id: string, status: TaskStatus) => void;
@@ -33,6 +46,7 @@ function TaskCard({ task, onMove, onDelete }: {
           </div>
           <div className="text-green-200 text-sm font-bold leading-tight">{task.title}</div>
           {task.project && <div className="text-green-800 text-xs mt-1">{task.project}</div>}
+          {task.dueAt && <div className="text-orange-400 text-xs mt-1">{formatDue(task.dueAt)}</div>}
           {task.notes && <div className="text-green-700 text-xs mt-1 truncate">{task.notes}</div>}
           {task.href && (
             <Link
@@ -72,13 +86,14 @@ function AddTaskForm({ onAdd }: { onAdd: (t: Partial<Task>) => void }) {
   const [priority, setPriority] = useState<Task['priority']>('P3');
   const [project, setProject] = useState('');
   const [notes, setNotes] = useState('');
+  const [dueAt, setDueAt] = useState('');
   const [status, setStatus] = useState<TaskStatus>('todo');
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
     if (!title.trim()) return;
-    onAdd({ title: title.trim(), priority, project, notes, status });
-    setTitle(''); setPriority('P3'); setProject(''); setNotes('');
+    onAdd({ title: title.trim(), priority, project, notes, dueAt: dueAt || undefined, status });
+    setTitle(''); setPriority('P3'); setProject(''); setNotes(''); setDueAt('');
     setOpen(false);
   }
 
@@ -109,6 +124,9 @@ function AddTaskForm({ onAdd }: { onAdd: (t: Partial<Task>) => void }) {
         <input value={project} onChange={e => setProject(e.target.value)}
           placeholder="project tag"
           className="bg-transparent border-b border-green-900 text-green-500 text-xs px-1 outline-none placeholder:text-green-900 w-24" />
+        <input value={dueAt} onChange={e => setDueAt(e.target.value)}
+          type="date"
+          className="bg-black border border-green-900 text-green-500 text-xs px-2 py-1 outline-none" />
       </div>
       <input value={notes} onChange={e => setNotes(e.target.value)}
         placeholder="notes (optional)"

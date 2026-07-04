@@ -26,6 +26,19 @@ function statusTone(status: string) {
   return 'text-green-800 border-green-950';
 }
 
+function formatDue(dueAt?: string) {
+  if (!dueAt) return '';
+  const due = new Date(`${dueAt}T23:59:59+03:00`);
+  if (Number.isNaN(due.getTime())) return dueAt;
+
+  const now = new Date();
+  const days = Math.ceil((due.getTime() - now.getTime()) / 86_400_000);
+  if (days < 0) return `overdue ${Math.abs(days)}d`;
+  if (days === 0) return 'due today';
+  if (days === 1) return 'due tomorrow';
+  return `due in ${days}d`;
+}
+
 export default async function TasksPage() {
   const projects = getAllProjectData();
   const missionTasks = getAllTasks()
@@ -95,6 +108,7 @@ export default async function TasksPage() {
                 {task.notes && <p className="text-green-800 text-xs mt-3 leading-relaxed">{task.notes}</p>}
                 <div className="flex flex-wrap gap-2 text-[10px] mt-3 border-t border-green-950 pt-2">
                   <span className={`border px-2 py-0.5 ${statusTone(task.status)}`}>{task.status}</span>
+                  {task.dueAt && <span className="border border-orange-900 px-2 py-0.5 text-orange-400">{formatDue(task.dueAt)}</span>}
                   {task.source && <span className="border border-green-950 px-2 py-0.5 text-green-900">{task.source}</span>}
                   {task.href && (
                     <Link href={task.href} className="border border-yellow-900 px-2 py-0.5 text-yellow-500 hover:text-yellow-200 hover:border-yellow-500">
