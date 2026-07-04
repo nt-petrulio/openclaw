@@ -14,6 +14,8 @@ export interface Task {
   source: TaskSource;
   project?: string;
   notes?: string;
+  href?: string;
+  actionLabel?: string;
   deleted?: boolean;
   createdAt: string;
   updatedAt: string;

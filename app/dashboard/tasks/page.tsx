@@ -96,6 +96,11 @@ export default async function TasksPage() {
                 <div className="flex flex-wrap gap-2 text-[10px] mt-3 border-t border-green-950 pt-2">
                   <span className={`border px-2 py-0.5 ${statusTone(task.status)}`}>{task.status}</span>
                   {task.source && <span className="border border-green-950 px-2 py-0.5 text-green-900">{task.source}</span>}
+                  {task.href && (
+                    <Link href={task.href} className="border border-yellow-900 px-2 py-0.5 text-yellow-500 hover:text-yellow-200 hover:border-yellow-500">
+                      {task.actionLabel ?? 'open'}
+                    </Link>
+                  )}
                 </div>
               </article>
             ))}

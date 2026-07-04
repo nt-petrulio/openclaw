@@ -20,6 +20,8 @@ export async function POST(req: NextRequest) {
     source: 'manual',
     project: body.project ?? '',
     notes: body.notes ?? '',
+    href: body.href,
+    actionLabel: body.actionLabel,
     createdAt: now,
     updatedAt: now,
   };
@@ -31,12 +33,14 @@ export async function POST(req: NextRequest) {
 
 export async function PATCH(req: NextRequest) {
   const body = await req.json();
-  const { id, status, priority, title, notes } = body as {
+  const { id, status, priority, title, notes, href, actionLabel } = body as {
     id: string;
     status?: TaskStatus;
     priority?: Task['priority'];
     title?: string;
     notes?: string;
+    href?: string;
+    actionLabel?: string;
   };
 
   const tasks = getManualTasks();
@@ -56,6 +60,8 @@ export async function PATCH(req: NextRequest) {
   if (priority !== undefined) task.priority = priority;
   if (title !== undefined) task.title = title;
   if (notes !== undefined) task.notes = notes;
+  if (href !== undefined) task.href = href;
+  if (actionLabel !== undefined) task.actionLabel = actionLabel;
   task.updatedAt = now;
 
   saveManualTasks(tasks);

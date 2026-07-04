@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useTransition } from 'react';
+import Link from 'next/link';
 import type { Task, TaskStatus, CronJob } from '@/lib/tasks';
 
 interface Column { id: TaskStatus; label: string; color: string; }
@@ -33,6 +34,14 @@ function TaskCard({ task, onMove, onDelete }: {
           <div className="text-green-200 text-sm font-bold leading-tight">{task.title}</div>
           {task.project && <div className="text-green-800 text-xs mt-1">{task.project}</div>}
           {task.notes && <div className="text-green-700 text-xs mt-1 truncate">{task.notes}</div>}
+          {task.href && (
+            <Link
+              href={task.href}
+              className="inline-block mt-2 text-xs border border-yellow-900 px-2 py-0.5 text-yellow-500 hover:text-yellow-200 hover:border-yellow-500"
+            >
+              {task.actionLabel ?? 'open'}
+            </Link>
+          )}
         </div>
         <button
           onClick={() => onDelete(task.id)}
