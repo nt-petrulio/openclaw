@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { getAllProjectData } from '@/lib/projects';
-import { getWorkspaceTasks } from '@/lib/workspace-tasks';
+import { getAllTasks } from '@/lib/tasks';
 
 export const dynamic = 'force-dynamic';
 
@@ -28,7 +28,7 @@ function statusTone(status: string) {
 
 export default async function TasksPage() {
   const projects = getAllProjectData();
-  const workspaceTasks = getWorkspaceTasks()
+  const missionTasks = getAllTasks()
     .filter((task) => task.status.toLowerCase() !== 'done')
     .sort((a, b) => a.priority.localeCompare(b.priority));
   const projectTasks = projects.flatMap((project) =>
@@ -40,9 +40,9 @@ export default async function TasksPage() {
     }))
   ).sort((a, b) => a.priority.localeCompare(b.priority));
 
-  const oneThing = workspaceTasks.find((t) => t.priority.startsWith('P1'));
+  const oneThing = missionTasks.find((t) => t.priority.startsWith('P1'));
   const fallbackThing = projectTasks.find((t) => t.priority.startsWith('P1')) ?? projectTasks[0];
-  const totalTasks = workspaceTasks.length + projectTasks.length;
+  const totalTasks = missionTasks.length + projectTasks.length;
 
   return (
     <main className="min-h-screen bg-black text-green-500 font-mono p-6 md:p-8">
@@ -51,7 +51,7 @@ export default async function TasksPage() {
           <div className="text-green-900 text-xs tracking-[0.35em] mb-2">MISSION CONTROL</div>
           <h1 className="text-4xl font-black text-green-300">TASKS</h1>
           <p className="text-green-800 text-sm mt-2">
-            {totalTasks} active tasks · {workspaceTasks.length} manual · {projectTasks.length} project todos
+            {totalTasks} active tasks · {missionTasks.length} mission queue · {projectTasks.length} project todos
           </p>
         </div>
         <Link href="/dashboard" className="text-green-800 hover:text-green-400">← dashboard</Link>
@@ -76,14 +76,14 @@ export default async function TasksPage() {
         </section>
       )}
 
-      {workspaceTasks.length > 0 && (
+      {missionTasks.length > 0 && (
         <section className="mb-7">
           <div className="flex items-center justify-between border-b border-green-950 pb-2 mb-3">
-            <h2 className="text-xs text-green-700 tracking-widest">{"// MANUAL QUEUE"}</h2>
-            <span className="text-xs text-green-900">from workspace tasks.json</span>
+            <h2 className="text-xs text-green-700 tracking-widest">{"// MISSION QUEUE"}</h2>
+            <Link href="/dashboard/taskboard" className="text-xs text-green-900 hover:text-green-500">open taskboard →</Link>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-            {workspaceTasks.map((task) => (
+            {missionTasks.map((task) => (
               <article key={task.id} className="border border-green-950 bg-zinc-950/70 p-4">
                 <div className="flex items-start justify-between gap-3">
                   <div>
